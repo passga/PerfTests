@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <version>7.8.3</version>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.bonitasoft.engine</groupId>
+    <artifactId>performance-tests</artifactId>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.version>2.11.7</scala.version>
+        <scala.compat.version>2.11</scala.compat.version>
+        <gatling.version>3.0.3</gatling.version>
+        <gatling-plugin.version>3.0.2</gatling-plugin.version>
+        <bonitaUrl></bonitaUrl>
+        <bonitaContext></bonitaContext>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bonitasoft.engine</groupId>
+            <artifactId>bonita-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bonitasoft.engine</groupId>
+            <artifactId>bonita-server</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bonitasoft.engine</groupId>
+            <artifactId>bonita-test-api-sp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bonitasoft.platform</groupId>
+            <artifactId>platform-resources</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>com.bonitasoft.engine</groupId>
+            <artifactId>bonita-client-sp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bonitasoft.engine</groupId>
+            <artifactId>bonita-server-sp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bonitasoft.engine</groupId>
+            <artifactId>bonita-test-api-sp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bonitasoft.platform</groupId>
+            <artifactId>platform-resources-sp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        -->
+    </dependencies>
+    <build>
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <!-- see http://davidb.github.com/scala-maven-plugin -->
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <args>
+                                <arg>-dependencyfile</arg>
+                                <arg>${project.build.directory}/.scala_dependencies</arg>
+                            </args>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <bonitaUrl>${bonitaUrl}</bonitaUrl>
+                        <bonitaContext>${bonitaContext}</bonitaContext>
+                    </systemPropertyVariables>
+                    <useFile>false</useFile>
+                    <disableXmlReport>true</disableXmlReport>
+                    <!-- If you have classpath issue like NoDefClassError,... -->
+                    <!-- useManifestOnlyJar>false</useManifestOnlyJar -->
+                    <includes>
+                        <include>**/*Test.*</include>
+                        <include>**/*Suite.*</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>${gatling-plugin.version}</version>
+                <configuration>
+                    <configFolder>${project.basedir}/src/test/resources</configFolder>
+                    <resultsFolder>${project.basedir}/target/gatling/results</resultsFolder>
+                    <simulationsFolder>${project.basedir}/src/test/scala</simulationsFolder>
+                    <runDescription>run bonita scenario</runDescription>
+                    <!--    <noReports>false</noReports> -->
+                    <!--   <reportsOnly>directoryName</reportsOnly> -->
+                    <!--   <simulationClass>foo.Bar</simulationClass> -->
+                    <!--   <jvmArgs> -->
+                    <!--     <jvmArg>-DmyExtraParam=foo</jvmArg> -->
+                    <!--   </jvmArgs> -->
+                    <!--    <fork>true</fork> -->
+                    <!--    <propagateSystemProperties>true</propagateSystemProperties> -->
+                    <!--   <failOnError>true</failOnError> -->
+                    <!--<disableCompiler>true</disableCompiler>-->
+                    <runMultipleSimulations>true</runMultipleSimulations>
+                    <includes>
+                        <!--<param>tests.BasicSimulation</param>-->
+                        <param>tests.BasicSimulation</param>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
