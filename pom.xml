@@ -39,8 +39,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.bonitasoft.engine</groupId>
-            <artifactId>bonita-test-api-sp</artifactId>
+            <groupId>org.bonitasoft.engine</groupId>
+            <artifactId>bonita-test-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
