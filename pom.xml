@@ -38,6 +38,7 @@
             <artifactId>bonita-server</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.bonitasoft.engine</groupId>
             <artifactId>bonita-test-api</artifactId>
