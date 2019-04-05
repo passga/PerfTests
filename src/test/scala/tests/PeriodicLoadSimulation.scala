@@ -26,10 +26,10 @@ class PeriodicLoadSimulation extends Simulation {
     .exec(waitForProcessCompletion())
     .exec(logout())
 
-  //setUp(scn.inject(atOnceUsers(2)).protocols(bonitaProtocol))
-    setUp(scn.inject(rampUsers(500).during(5 seconds)).protocols(bonitaProtocol))
+  //setUp(scn.inject(atOnceUsers(100)).protocols(bonitaProtocol))
+   // setUp(scn.inject(rampUsers(500).during(5 seconds)).protocols(bonitaProtocol))
 
-  //setUp(scn.inject(rampUsers(6000).during(600 seconds)).protocols(bonitaProtocol))
+  setUp(scn.inject(rampUsers(6000).during(600 seconds)).protocols(bonitaProtocol))
 
 
 
