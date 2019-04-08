@@ -22,15 +22,14 @@ class PeriodicLoadSimulation extends Simulation {
     .exec(login()
     .withUser("walter.bates", "bpm"))
     .exec(startProcess("PeriodicLoad", "1.0"))
-    .exec(executeTaskWhenReady("Step1",null,"walter.bates"))
+    .exec(executeTaskWhenReady("Calculate Fibonnaci",null,"walter.bates"))
     .exec(waitForProcessCompletion())
     .exec(logout())
 
-  //setUp(scn.inject(atOnceUsers(100)).protocols(bonitaProtocol))
-   // setUp(scn.inject(rampUsers(500).during(5 seconds)).protocols(bonitaProtocol))
-
-  setUp(scn.inject(rampUsers(6000).during(600 seconds)).protocols(bonitaProtocol))
 
 
+  setUp(scn.inject(atOnceUsers(100)).protocols(bonitaProtocol))
+//  setUp(scn.inject(rampUsers(6000).during(600 seconds)).protocols(bonitaProtocol))
 
+// mvn gatling:test -DbonitaUrl=http://localhost:8080 -DbonitaContext=bonita -Dgatling.simulationClass=tests.PeriodicLoadSimulation
 }
