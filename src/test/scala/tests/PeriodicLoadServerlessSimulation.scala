@@ -23,7 +23,7 @@ class PeriodicLoadServerlessSimulation extends Simulation {
     .exec(logout())
 
 
-  setUp(scn.inject(atOnceUsers(100)).protocols(bonitaProtocol))
+  setUp(scn.inject(atOnceUsers(200)).protocols(bonitaProtocol))
 //  setUp(scn.inject(rampUsers(6000).during(600 seconds)).protocols(bonitaProtocol))
 
 //mvn gatling:test -DbonitaUrl=http://localhost:8080 -DbonitaContext=bonita -Dgatling.simulationClass=tests.PeriodicLoadServerlessSimulation
