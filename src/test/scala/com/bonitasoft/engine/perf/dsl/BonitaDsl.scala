@@ -21,4 +21,5 @@ trait BonitaDsl {
 
   def executeTaskWhenReady(taskName: String, contract: util.Map[String,Serializable], username: String) = new ExecuteTaskActionBuilder(taskName, contract, username)
 
+  def executeFirstOpenAction(contract: util.Map[String,Serializable]) = new ExecuteFirstOpenActionBuilder(contract)
 }

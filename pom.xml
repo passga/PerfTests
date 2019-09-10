@@ -138,6 +138,7 @@
                     <includes>
                         <!--<param>tests.BasicSimulation</param>-->
                         <param>tests.BasicSimulation</param>
+                        <param>tests.AuditSimulation</param>
                     </includes>
                 </configuration>
             </plugin>
